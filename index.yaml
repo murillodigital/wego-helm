@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  wego:
+  - apiVersion: v2
+    appVersion: 0.0.5
+    created: "2021-06-21T21:15:32.195706125Z"
+    description: Weave GitOps Core
+    digest: dd7ef57f32de04b1eddcdc42eb3d8f76c1595c013fe2b243990b1d100deda910
+    name: wego
+    type: application
+    urls:
+    - https://murillodigital.github.io/wego-helm/wego-0.0.1.tgz
+    version: 0.0.1
+generated: "2021-06-21T21:15:32.194354434Z"
