@@ -1,14 +1,5 @@
 ---
 apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    app.kubernetes.io/instance: wego-system
-    app.kubernetes.io/part-of: flux
-    app.kubernetes.io/version: v0.13.2
-  name: wego-system
----
-apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
@@ -16,7 +7,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.13.2
   name: helm-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -26,7 +17,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.13.2
   name: image-automation-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -36,7 +27,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.13.2
   name: image-reflector-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -46,7 +37,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.13.2
   name: kustomize-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -56,7 +47,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.13.2
   name: notification-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -66,7 +57,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.13.2
   name: source-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -163,10 +154,10 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kustomize-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 - kind: ServiceAccount
   name: helm-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -183,22 +174,22 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kustomize-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 - kind: ServiceAccount
   name: helm-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 - kind: ServiceAccount
   name: source-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 - kind: ServiceAccount
   name: notification-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 - kind: ServiceAccount
   name: image-reflector-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 - kind: ServiceAccount
   name: image-automation-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: v1
 kind: Service
@@ -209,7 +200,7 @@ metadata:
     app.kubernetes.io/version: v0.13.2
     control-plane: controller
   name: notification-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
   - name: http
@@ -229,7 +220,7 @@ metadata:
     app.kubernetes.io/version: v0.13.2
     control-plane: controller
   name: source-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
   - name: http
@@ -249,7 +240,7 @@ metadata:
     app.kubernetes.io/version: v0.13.2
     control-plane: controller
   name: webhook-receiver
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
   - name: http
@@ -269,7 +260,7 @@ metadata:
     app.kubernetes.io/version: v0.13.2
     control-plane: controller
   name: helm-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
@@ -342,7 +333,7 @@ metadata:
     app.kubernetes.io/version: v0.13.2
     control-plane: controller
   name: image-automation-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
@@ -417,7 +408,7 @@ metadata:
     app.kubernetes.io/version: v0.13.2
     control-plane: controller
   name: image-reflector-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
@@ -496,7 +487,7 @@ metadata:
     app.kubernetes.io/version: v0.13.2
     control-plane: controller
   name: kustomize-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
@@ -571,7 +562,7 @@ metadata:
     app.kubernetes.io/version: v0.13.2
     control-plane: controller
   name: notification-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
@@ -647,7 +638,7 @@ metadata:
     app.kubernetes.io/version: v0.13.2
     control-plane: controller
   name: source-controller
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
@@ -730,7 +721,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.13.2
   name: allow-egress
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   egress:
   - {}
@@ -750,7 +741,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.13.2
   name: allow-scraping
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   ingress:
   - from:
@@ -770,7 +761,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.13.2
   name: allow-webhooks
-  namespace: wego-system
+  namespace: {{ .Release.Namespace }}
 spec:
   ingress:
   - from:
