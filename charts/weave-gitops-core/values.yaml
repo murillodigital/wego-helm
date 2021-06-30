@@ -1,6 +1,6 @@
 ---
 ClusterOwner: "weaveworks-dev"
-GitRepositoryURL: "ssh://git@github.com/stefanprodan/podinfo"
+GitRepositoryUrl: "ssh://git@github.com/stefanprodan/podinfo"
 GitRepositoryPath: "./tenants/"
 PrivateRepo: true
 UseSSH: true
