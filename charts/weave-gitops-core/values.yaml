@@ -1,9 +1,0 @@
----
-ClusterOwner: "weaveworks-dev"
-GitRepositoryUrl: "ssh://git@github.com/stefanprodan/podinfo"
-GitRepositoryPath: "./tenants/"
-PrivateRepo: true
-UseSSH: true
-SSHIdentity: "<Base64 contents of SSH private key file>"
-KnownHosts: "<Base64 contents of known hosts file>"
-GitBranch: "main"
